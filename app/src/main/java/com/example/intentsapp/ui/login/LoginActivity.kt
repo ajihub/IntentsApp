@@ -14,7 +14,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-
+import android.content.Intent
+import com.example.intentsapp.MainActivity
 import com.example.intentsapp.R
 
 class LoginActivity : AppCompatActivity() {
@@ -59,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
                 updateUiWithUser(loginResult.success)
             }
             setResult(Activity.RESULT_OK)
-
+            gotoMainActivity()
             //Complete and destroy login activity once successful
             finish()
         })
@@ -78,6 +79,8 @@ class LoginActivity : AppCompatActivity() {
                     password.text.toString()
                 )
             }
+
+
 
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
@@ -103,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
         // TODO : initiate successful logged in experience
         Toast.makeText(
             applicationContext,
-            "$welcome $displayName",
+            "Welcome User!",
             Toast.LENGTH_LONG
         ).show()
     }
@@ -111,7 +114,12 @@ class LoginActivity : AppCompatActivity() {
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
+    private fun gotoMainActivity(){
+        val intent = Intent (this, MainActivity::class.java)
+        startActivity(intent)
+    }
 }
+
 
 /**
  * Extension function to simplify setting an afterTextChanged action to EditText components.
